@@ -176,8 +176,8 @@ wss://your-deployment.workers.dev:0/ws
 ```
 
 ## 贡献
-
-欢迎提交 Issue 和 Pull Request 来改进本项目。
+由于基于JS创建项目功能有限。
+欢迎提交 Issue 和 Pull Request 或 Fork 来改进本项目。
 
 ## 许可证
 
