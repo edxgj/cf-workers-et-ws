@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 import { HEADER_SIZE } from './constants.js';
 
 export function parseHeader(buffer) {
@@ -13,14 +14,22 @@ export function parseHeader(buffer) {
   };
 }
 
-export function createHeader(fromPeerId, toPeerId, packetType, payloadLen) {
+export function createHeader(fromPeerId, toPeerId, packetType, payloadLen, flags = 0, forwardCounter = 1) {
   const buffer = Buffer.alloc(HEADER_SIZE);
+  
+  // 【新增功能】：注入 Latency First 标志位 (0x02)
+  let finalFlags = flags;
+  if (process.env.EASYTIER_LATENCY_FIRST === "1") {
+    finalFlags |= 0x02;
+  }
+
   buffer.writeUInt32LE(fromPeerId, 0);
   buffer.writeUInt32LE(toPeerId, 4);
   buffer.writeUInt8(packetType, 8);
-  buffer.writeUInt8(0, 9);
-  buffer.writeUInt8(1, 10);
+  buffer.writeUInt8(finalFlags, 9); // 写入混合后的 flags
+  buffer.writeUInt8(forwardCounter, 10);
   buffer.writeUInt8(0, 11);
   buffer.writeUInt32LE(payloadLen, 12);
+  
   return buffer;
 }
