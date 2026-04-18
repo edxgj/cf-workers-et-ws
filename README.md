@@ -37,7 +37,11 @@
 - pnpm (推荐) 或 npm
 - Wrangler CLI (Cloudflare Workers 工具链)
 
-### 安装步骤
+### 一键安装步骤
+
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=[https://github.com/Teleseon/cf-workers-et-ws])
+
+### 手动安装步骤
 
 1. 克隆项目仓库：
 ```bash
